@@ -60,7 +60,7 @@ class ProjectController extends Controller
         $newProject = new Project();
         $newProject->fill($data);
         $newProject->save();
-        $newProject->technologies()->sync($data['technologies']);
+        $newProject->technologies()->sync($data['technologies'] ?? []);
 
         return redirect()->route('admin.projects.show', $newProject->slug);
     }
@@ -118,7 +118,7 @@ class ProjectController extends Controller
             $data['thumbnail'] = Storage::put('imgs/', $data['thumbnail']);
         }
         $project->update($data);
-        $project->technologies()->sync($data['technologies']);
+        $project->technologies()->sync($data['technologies'] ?? []);
 
         return redirect()->route('admin.projects.show', compact('project'));
     }
