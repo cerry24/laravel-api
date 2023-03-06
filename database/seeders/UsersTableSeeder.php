@@ -7,6 +7,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UsersTableSeeder extends Seeder
 {
@@ -21,6 +22,7 @@ class UsersTableSeeder extends Seeder
         $testUser->name = 'samuele cerretti';
         $testUser->email = 'admin@gmail.com';
         $testUser->password = Hash::make('87654321');
+        $testUser->api_token = Str::random(80);
         $testUser->save();
 
         for ($i=0; $i <10; $i++) { 
@@ -28,6 +30,7 @@ class UsersTableSeeder extends Seeder
             $newUser->name = $faker->name();
             $newUser->email = $faker->unique()->email();
             $newUser->password = Hash::make($faker->password());
+            $newUser->api_token = Str::random(80);
             $newUser->save();
         }
     }
