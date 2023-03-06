@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
@@ -20,7 +21,12 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::paginate(14);
+        if ( Auth::user()->roles()->pluck('id')->contains(4) || Auth::user()->roles()->pluck('id')->contains(3) ) {
+            $projects = Project::paginate(14);
+        } else {
+            $projects = [];
+        }
+        
 
         return view('admin.projects.index', compact('projects'));
     }

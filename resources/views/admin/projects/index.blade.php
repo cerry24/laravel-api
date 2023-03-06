@@ -34,7 +34,9 @@
                         @endforelse
                     </tbody>
                 </table>
+                @if ($projects != [])
                 {{ $projects->links() }}
+                @endif
             </div>
         </div>
     </div>
